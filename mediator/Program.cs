@@ -39,13 +39,7 @@ namespace ConsoleApplication
             {
                 Name = name;
                 _mediator = mediator;
-                _mediator.MessageReceived += new MessageReceivedEventHandler(Receive);
-            }
-
-            private void Receive(string message, string from)
-            {
-                if (from != Name)
-                    Console.WriteLine("{0} received '{1}' from {2}", Name, message, from);
+                _mediator.MessageReceived += (m, f) => { if (f != Name) { Console.WriteLine("{0} received '{1}' from {2}", Name, m, f); } };
             }
 
             public void Send(string message)
